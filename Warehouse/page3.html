@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+      :root {
+        --bg: #1a1f1c;
+        --bg-card: #222824;
+        --text: #d7ddd4;
+        --text-dim: #9aa89a;
+        --accent: #7fae7a;
+        --code-bg: #161b18;
+        --border: #333a35;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .topbar {
+        width: 100%;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+      }
+
+      .nav a {
+        color: var(--text-dim);
+        text-decoration: none;
+        margin-right: 18px;
+      }
+
+      .nav a:hover {
+        color: var(--accent);
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        background: var(--bg);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 6px 12px;
+        margin-left: 8px;
+        cursor: pointer;
+      }
+
+      .primary-btn:hover,
+      .secondary-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .page {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 32px 16px 64px;
+      }
+
+      .section-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 24px 32px;
+      }
+
+      .section-card h2 {
+        color: var(--accent);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 6px;
+        margin-top: 36px;
+      }
+
+      .section-card h2:first-child {
+        margin-top: 0;
+      }
+
+      .section-card ul {
+        color: var(--text-dim);
+        line-height: 1.8;
+      }
+
+      .section-card pre {
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 14px 18px;
+        overflow-x: auto;
+      }
+
+      .section-card code {
+        color: #c8d6c0;
+        font-family: "Consolas", "Menlo", monospace;
+        font-size: 0.92em;
+        line-height: 1.6;
+        white-space: pre;
+      }
+    </style>
+  </head>
+  <body data-page="page2">
+    <div id="access-block" class="access-block hidden">
+    </div>
+
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="page2.html">linux</a>
+          <a href="page3.html">SQL</a>
+          <a href="page4.html">笔记</a>
+          <a href="page5.html">简历</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page">
+      <section class="section-card" data-editable="intro-copy">
+
+        <h2>基础查询</h2>
+        <pre><code>SELECT 列名称 FROM 表名称
+SELECT DISTINCT 列名称 FROM 表名称
+SELECT 列名称 FROM 表名称 WHERE 列 运算符 值
+INSERT INTO 表名称 VALUES (值1, 值2,....)
+UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
+DELETE FROM 表名称 WHERE 列名称 = 值
+SELECT TOP 列数额 * FROM 表名称
+SELECT TOP 百分比 PERCENT * FROM 表名称</code></pre>
+
+        <h2>条件筛选</h2>
+        <pre><code>SELECT * FROM 表名称 WHERE 列名称 IN ('列内容1','列内容2')
+SELECT * FROM 表名称 WHERE 列名称 BETWEEN '列内容1' AND '列内容2'  -- 输出为列内容1到列内容2区间
+SELECT * FROM 表名称 WHERE 列名称 NOT BETWEEN '列内容1' AND '列内容2'  -- 输出为列内容1到列内容2以外的值</code></pre>
+        <ul>
+          <li>AND 和 OR 可在 WHERE 子语句中把两个或多个条件结合起来。</li>
+          <li>如果第一个条件和第二个条件都成立，则 AND 运算符显示一条记录。</li>
+          <li>如果第一个条件和第二个条件中只要有一个成立，则 OR 运算符显示一条记录。</li>
+        </ul>
+
+        <h2>别名与连接</h2>
+        <pre><code>SELECT 列名称1 AS 别名1, 列名称2 AS 别名2 FROM 表名称
+
+SELECT 表名称1.列名称1, 表名称1.列名称2, 表名称2.列名称1
+FROM 表名称1, 表名称2
+WHERE 表名称1 = 表名称2
+
+SELECT Persons.LastName, Persons.FirstName, Orders.OrderNo
+FROM Persons
+INNER JOIN Orders ON Persons.Id_P = Orders.Id_P
+ORDER BY Persons.LastName
+
+SELECT 表名称1.列名称, 表名称2.列名称
+FROM 表名称1
+CROSS JOIN 表名称2  -- 完全连接 (FULL OUTER JOIN)</code></pre>
+
+        <h2>事务</h2>
+        <pre><code>BEGIN TRANSACTION;  -- 所有任务成功在提交，有一个失败则回滚
+COMMIT;             -- 如果所有的操作都成功，提交事务</code></pre>
+
+        <h2>日期时间函数</h2>
+        <pre><code>GETDATE()             -- 返回当前的日期和时间
+CURRENT_TIMESTAMP     -- 同 GETDATE()，返回当前的日期和时间
+CURRENT_TIME          -- 返回当前的时间
+CURRENT_DATE          -- 返回当前的日期</code></pre>
+
+        <h2>排序与分组</h2>
+        <pre><code>-- ORDER BY 语句用于根据指定的列对结果集进行排序
+-- ORDER BY 语句默认按照升序对记录进行排序
+-- 如果希望按照降序排序，可以使用 DESC 关键字
+
+SELECT 列名称 FROM 表名称
+GROUP BY 列名称
+HAVING COUNT(*) > 1  -- 查询列重复值 > 1 的值</code></pre>
+
+        <h2>高级查询</h2>
+        <pre><code>-- 子查询
+SELECT 列名称 FROM 表名称 WHERE 列名称 = (SELECT 列名称 FROM 另一表 WHERE 条件);
+
+-- EXISTS 子查询
+SELECT 列名称 FROM 表名称 WHERE EXISTS (SELECT 1 FROM 另一表 WHERE 条件);
+
+-- ANY 和 ALL
+SELECT 列名称 FROM 表名称 WHERE 列名称 > ANY (SELECT 列名称 FROM 另一表 WHERE 条件);
+SELECT 列名称 FROM 表名称 WHERE 列名称 > ALL (SELECT 列名称 FROM 另一表 WHERE 条件);</code></pre>
+
+        <h2>联合查询</h2>
+        <pre><code>-- UNION：合并并去重
+SELECT 列名称 FROM 表名称1
+UNION
+SELECT 列名称 FROM 表名称2;
+
+-- UNION ALL：合并所有结果，不去重
+SELECT 列名称 FROM 表名称1
+UNION ALL
+SELECT 列名称 FROM 表名称2;</code></pre>
+
+        <h2>窗口函数</h2>
+        <pre><code>-- ROW_NUMBER
+SELECT 列名称, ROW_NUMBER() OVER (ORDER BY 列名称) AS 行号 FROM 表名称;
+
+-- RANK 和 DENSE_RANK
+SELECT 列名称, RANK() OVER (ORDER BY 列名称) AS 排名 FROM 表名称;
+SELECT 列名称, DENSE_RANK() OVER (ORDER BY 列名称) AS 密集排名 FROM 表名称;
+
+-- NTILE
+SELECT 列名称, NTILE(4) OVER (ORDER BY 列名称) AS 四分位数 FROM 表名称;
+
+-- 窗口聚合函数 (SUM, AVG, MIN, MAX)
+SELECT 列名称,
+    SUM(列名称) OVER (PARTITION BY 列名称2) AS 分区总和,
+    AVG(列名称) OVER (PARTITION BY 列名称2) AS 分区平均值
+FROM 表名称;</code></pre>
+
+        <h2>临时表与表变量</h2>
+        <pre><code>-- 临时表
+CREATE TABLE #临时表名称 (列名称 数据类型, ...);
+
+INSERT INTO #临时表名称
+SELECT 列名称 FROM 表名称 WHERE 条件;
+
+SELECT 列名称 FROM #临时表名称;
+
+DROP TABLE #临时表名称;
+
+-- 表变量
+DECLARE @表变量 TABLE (列名称 数据类型, ...);
+
+INSERT INTO @表变量
+SELECT 列名称 FROM 表名称 WHERE 条件;
+
+SELECT 列名称 FROM @表变量;</code></pre>
+
+        <h2>通用表表达式 (CTE)</h2>
+        <pre><code>-- 使用 CTE
+WITH CTE名称 AS (
+    SELECT 列名称 FROM 表名称 WHERE 条件
+)
+SELECT 列名称 FROM CTE名称 WHERE 条件;
+
+-- 递归 CTE
+WITH 递归CTE AS (
+    SELECT 列名称 FROM 表名称 WHERE 条件
+    UNION ALL
+    SELECT 列名称 FROM 表名称, 递归CTE WHERE 条件
+)
+SELECT 列名称 FROM 递归CTE;</code></pre>
+
+        <h2>聚合与分组</h2>
+        <pre><code>-- GROUP BY 子句
+SELECT 列名称, COUNT(*), SUM(列名称2), AVG(列名称2)
+FROM 表名称
+GROUP BY 列名称;
+
+-- ROLLUP
+SELECT 列名称1, 列名称2, SUM(列名称3)
+FROM 表名称
+GROUP BY ROLLUP (列名称1, 列名称2);
+
+-- CUBE
+SELECT 列名称1, 列名称2, SUM(列名称3)
+FROM 表名称
+GROUP BY CUBE (列名称1, 列名称2);</code></pre>
+
+        <h2>数据定义语言 (DDL)</h2>
+        <pre><code>CREATE DATABASE 数据库名称;   -- 创建数据库
+DROP DATABASE 数据库名称;     -- 删除数据库
+
+CREATE TABLE 表名称 (列1 数据类型 约束, 列2 数据类型 约束, ...);  -- 创建表
+DROP TABLE 表名称;  -- 删除表
+
+ALTER TABLE 表名称 ADD 列名称 数据类型;             -- 添加列
+ALTER TABLE 表名称 DROP COLUMN 列名称;              -- 删除列
+ALTER TABLE 表名称 ALTER COLUMN 列名称 新数据类型;  -- 修改列类型</code></pre>
+
+        <h2>索引</h2>
+        <pre><code>CREATE INDEX 索引名称 ON 表名称(列名称);  -- 创建索引
+DROP INDEX 表名称.索引名称;               -- 删除索引</code></pre>
+
+        <h2>视图</h2>
+        <pre><code>CREATE VIEW 视图名称 AS SELECT 列名称 FROM 表名称 WHERE 条件;  -- 创建视图
+DROP VIEW 视图名称;  -- 删除视图</code></pre>
+
+        <h2>存储过程</h2>
+        <pre><code>CREATE PROCEDURE 存储过程名称
+AS
+BEGIN
+    -- SQL语句
+END;
+
+EXEC 存储过程名称;              -- 执行存储过程
+DROP PROCEDURE 存储过程名称;    -- 删除存储过程</code></pre>
+
+        <h2>用户定义函数</h2>
+        <pre><code>CREATE FUNCTION 函数名称 (@参数 数据类型)
+RETURNS 数据类型
+AS
+BEGIN
+    DECLARE @结果 数据类型;
+    -- 函数逻辑
+    RETURN @结果;
+END;
+
+SELECT dbo.函数名称(参数);   -- 调用用户定义函数
+DROP FUNCTION 函数名称;      -- 删除用户定义函数</code></pre>
+
+        <h2>触发器</h2>
+        <pre><code>CREATE TRIGGER 触发器名称
+ON 表名称
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    -- 触发器逻辑
+END;
+
+DROP TRIGGER 触发器名称;  -- 删除触发器</code></pre>
+
+        <h2>常用系统函数</h2>
+        <pre><code>SELECT GETDATE();                     -- 获取当前日期和时间
+SELECT LEN('字符串');                  -- 字符串长度
+SELECT CONCAT('字符串1', '字符串2');    -- 字符串拼接
+SELECT CAST(表达式 AS 数据类型);        -- 转换数据类型
+SELECT CONVERT(数据类型, 表达式);       -- 转换数据类型</code></pre>
+
+        <h2>条件控制</h2>
+        <pre><code>-- IF...ELSE 语句
+IF 条件
+BEGIN
+    -- SQL语句
+END
+ELSE
+BEGIN
+    -- SQL语句
+END;
+
+-- CASE 表达式
+SELECT 列名称,
+    CASE
+        WHEN 条件1 THEN '结果1'
+        WHEN 条件2 THEN '结果2'
+        ELSE '其他结果'
+    END AS 别名
+FROM 表名称;</code></pre>
+
+        <h2>Excel 公式</h2>
+        <pre><code>=PHONETIC(E1225:E1234)              -- 行合并
+="'"&B1231&"'"&","                  -- 加引号和逗号</code></pre>
+
+      </section>
+    </main>
+  </body>
+</html>

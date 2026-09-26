@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+      :root {
+        --bg: #1a1f1c;
+        --bg-card: #222824;
+        --text: #d7ddd4;
+        --text-dim: #9aa89a;
+        --accent: #7fae7a;
+        --code-bg: #161b18;
+        --border: #333a35;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .topbar {
+        width: 100%;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+      }
+
+      .nav a {
+        color: var(--text-dim);
+        text-decoration: none;
+        margin-right: 18px;
+      }
+
+      .nav a:hover {
+        color: var(--accent);
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        background: var(--bg);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 6px 12px;
+        margin-left: 8px;
+        cursor: pointer;
+      }
+
+      .primary-btn:hover,
+      .secondary-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .page {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 32px 16px 64px;
+      }
+
+      .section-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 24px 32px;
+      }
+
+      .section-card h2 {
+        color: var(--accent);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 6px;
+        margin-top: 36px;
+      }
+
+      .section-card h2:first-child {
+        margin-top: 0;
+      }
+
+      .section-card ul {
+        color: var(--text-dim);
+        line-height: 1.8;
+      }
+
+      .section-card pre {
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 14px 18px;
+        overflow-x: auto;
+      }
+
+      .section-card code {
+        color: #c8d6c0;
+        font-family: "Consolas", "Menlo", monospace;
+        font-size: 0.92em;
+        line-height: 1.6;
+        white-space: pre;
+      }
+    </style>
+  </head>
+  <body data-page="page4">
+    <div id="access-block" class="access-block hidden">
+    </div>
+
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="page2.html">linux</a>
+          <a href="page3.html">SQL</a>
+          <a href="page4.html">笔记</a>
+          <a href="page5.html">简历</a>
+        </nav>
+      </div>
+    </header>
